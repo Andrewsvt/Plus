@@ -27,16 +27,24 @@ function calculate() {
     error.className = "error-mesage";
     error.innerHTML = "Это не число";
 
-    if(!firstInput.value.match(/^[0-9]+$/) && !secondInput.value.match(/^[0-9]+$/)){
+    if(firstInput.value.match(/,/)) {
+        firstInput.value = firstInput.value.replace(/,/g, '.');
+    }
+	
+	if(secondInput.value.match(/,/)) {
+        secondInput.value = secondInput.value.replace(/,/g, '.');
+    }
+
+    if(!firstInput.value.match(/^[0-9\.]+$/) && !secondInput.value.match(/^[0-9\.]+$/)){
         firstInput.parentNode.insertBefore(error, firstInput.nextSibling);
         secondInput.parentNode.insertBefore(error.cloneNode(true), secondInput.nextSibling);
     }
 
-    else if (!firstInput.value.match(/^[0-9]+$/)){
+    else if (!firstInput.value.match(/^[0-9\.]+$/)){
         firstInput.parentNode.insertBefore(error, firstInput.nextSibling);
     }
 
-    else if (!secondInput.value.match(/^[0-9]+$/)){
+    else if (!secondInput.value.match(/^[0-9\.]+$/)){
         secondInput.parentNode.insertBefore(error, secondInput.nextSibling);
     }
 
@@ -48,16 +56,3 @@ function calculate() {
     }
 }
 button.onclick = calculate;
-
-/* button.onclick = function active(){
-    if (isNaN(+firstInput.value) == true) {
-        error_message.innerHTML = 'Its not number';
-    } 
-    else if (isNaN(+secondInput.value) == true) {
-        error_message.innerHTML = 'Its not number';
-    }
-    else {
-        result.innerHTML = +firstInput.value + +secondInput.value;
-    }
-    document.body.appendChild(result);
-} */
